@@ -6,11 +6,15 @@
 .pnp.js
 .idea
 
+
+
 # testing
 /coverage
 
 # production
 /build
+
+/src/config.js
 
 # misc
 .DS_Store
