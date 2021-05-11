@@ -3,8 +3,8 @@ import DiscoverBlock from './DiscoverBlock/components/DiscoverBlock';
 import '../styles/_discover.scss';
 import config from '../../../config'
 import axios from 'axios';
-import {useDispatch} from 'react-redux'
-import { fetchNewReleases } from '../../../actions/discover';
+import {useDispatch, useSelector} from 'react-redux'
+import { fetchNewReleases, fetchCategories, fetchPlaylist} from '../../../actions/discover';
 
 
 
@@ -12,18 +12,19 @@ const Discover = ()=>   {
 const {api:{baseUrl, authUrl, redirectUrl, clientId}} = config
 const dispatch = useDispatch()
 
+const newReleases = useSelector(state => state.discover.newReleases.items)
+const playlists = useSelector(state => state.discover.playlist.items)
+const categories = useSelector(state => state.discover.categories.items)
+
 if (!localStorage.getItem('token')) {
   window.location = `${authUrl}?client_id=${clientId}&redirect_uri=${redirectUrl}&response_type=token&show_dialog=true`
 }
 
 
-  const [newReleases, setNewReleases] = useState([])
-  const [playlists, setPlaylists] = useState([])
-  const [categories, setCategories] = useState([])
-
-  
 useEffect(() => {
   dispatch(fetchNewReleases())
+  dispatch(fetchCategories())
+  dispatch(fetchPlaylist())
 }, [])
 
     return (
