@@ -12,9 +12,9 @@ const Discover = ()=>   {
 const {api:{baseUrl, authUrl, redirectUrl, clientId}} = config
 const dispatch = useDispatch()
 
-const newReleases = useSelector(state => state.discover.newReleases.items)
-const playlists = useSelector(state => state.discover.playlist.items)
-const categories = useSelector(state => state.discover.categories.items)
+const newReleases = useSelector(state => state.discover.newReleases)
+const playlists = useSelector(state => state.discover.playlist)
+const categories = useSelector(state => state.discover.categories)
 
 if (!localStorage.getItem('token')) {
   window.location = `${authUrl}?client_id=${clientId}&redirect_uri=${redirectUrl}&response_type=token&show_dialog=true`
@@ -29,12 +29,12 @@ useEffect(() => {
 
     return (
       <div className="discover">
-        <DiscoverBlock text="RELEASED THIS WEEK" id="released" data={newReleases} />
-        <DiscoverBlock text="FEATURED PLAYLISTS" id="featured" data={playlists} />
-        <DiscoverBlock text="BROWSE" id="browse" data={categories} imagesKey="icons" />
+        <DiscoverBlock text="RELEASED THIS WEEK" id="released" data={newReleases.items}   loading={newReleases.loading}/>
+        <DiscoverBlock text="FEATURED PLAYLISTS" id="featured" data={playlists.items} loading={playlists.loading} />
+        <DiscoverBlock text="BROWSE" id="browse" data={categories.items} imagesKey="icons"  loading={categories.loading}/>
       </div>
     );
   
 }
-
+ 
 export default Discover

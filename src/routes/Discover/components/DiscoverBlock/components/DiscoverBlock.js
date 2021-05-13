@@ -2,6 +2,7 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import DiscoverItem from './DiscoverItem';
+import {BeatLoader} from 'react-spinners'
 import '../styles/_discover-block.scss';
 
 function scrollContainer(id, { isNegative } = {}) {
@@ -13,9 +14,13 @@ function scrollContainer(id, { isNegative } = {}) {
   };
 }
 
-export default function DiscoverBlock({ text, id, data, imagesKey = 'images' }) {
+export default function DiscoverBlock({ text, id, data, imagesKey = 'images',loading  }) {
   return (
     <div className="discover-block">
+      <div className="discover-block__loader">
+        <BeatLoader loading={loading} color="#564FD8"/>
+      </div>
+
       <div className="discover-block__header">
         <h2>{text}</h2>
         <span />
